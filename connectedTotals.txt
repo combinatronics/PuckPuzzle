@@ -1,0 +1,22 @@
+SRC-4033:A3 awilliams$ python GeniusPuckConnected.py 10
+total: 368640 out of 185794560
+504.0
+SRC-4033:A3 awilliams$ python GeniusPuckConnected.py 8
+total: 2520 out of 645120
+256.0
+SRC-4033:A3 awilliams$ python GeniusPuckConnected.py 6
+total: 96 out of 3840
+40.0
+SRC-4033:A3 awilliams$ python GeniusPuckConnected.py 4
+total: 6 out of 48
+8.0
+SRC-4033:A3 awilliams$ python GeniusPuckConnected.py 2
+total: 2 out of 2
+1.0
+
+368640
+2520
+96
+6
+2
+
