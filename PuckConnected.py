@@ -19,13 +19,13 @@ def main(argv):
 	start = list(range(1,n+1))
 
 	#
-	num_reached = BFS(start)
+	num_reached = BFS(start, updates=True)
 	print(num_reached)
 	print(total_nodes(n))
 	print(total_nodes(n) / float(num_reached))
 
 #
-def BFS(start):
+def BFS(start, updates=False):
 	n = len(start)
 	S = SignedPermutations()
 	t = S.total(n) # note: our first symbol is +1 so this is wasteful
@@ -40,6 +40,9 @@ def BFS(start):
 				reached[S.rank(neighbor)] = True
 				Q.append(neighbor)
 				num_reached += 1
+				if num_reached % 10000 == 0:
+					print("reached: " + str(num_reached))
+					print("")
 	return num_reached
 
 
