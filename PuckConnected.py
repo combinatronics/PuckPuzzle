@@ -6,6 +6,7 @@ So we are determining the connected componenent of the underlying graph that con
 
 from SignedPermutations import SignedPermutations
 from GeniusPuckUtilities import flip, neighbors, node_string, total_nodes
+import numpy as np
 import sys
 
 def main(argv):
@@ -18,10 +19,7 @@ def main(argv):
 	start = list(range(1,n+1))
 
 	#
-	distances = BFS(start)
-
-	reached = [i for i, d in enumerate(distances) if d > -1]
-	num_reached = len(reached)
+	num_reached = BFS(start)
 	print(num_reached)
 	print(total_nodes(n))
 	print(total_nodes(n) / float(num_reached))
@@ -30,17 +28,19 @@ def main(argv):
 def BFS(start):
 	n = len(start)
 	S = SignedPermutations()
-	distances = [-1] * S.total(n)
-	distances[S.rank(start)] = 0
+	t = S.total(n) # note: our first symbol is +1 so this is wasteful
+	reached = np.zeros([t], np.bool)  # could use np.int8 for distances
+	reached[S.rank(start)] = True
+	num_reached = 1
 	Q = [start]
 	while len(Q) > 0:
 		node = Q.pop(0)
-		distance = distances[S.rank(node)]
 		for neighbor in neighbors(node):
-			if distances[S.rank(neighbor)] == -1:
-				distances[S.rank(neighbor)] = distance + 1
+			if reached[S.rank(neighbor)] == False:
+				reached[S.rank(neighbor)] = True
 				Q.append(neighbor)
-	return distances
+				num_reached += 1
+	return num_reached
 
 
 
